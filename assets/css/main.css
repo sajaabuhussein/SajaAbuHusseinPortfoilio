@@ -888,19 +888,18 @@ section, .section {
   font-family: inherit;
   font-size: 0.95rem;      
   font-weight: 500;
-  color: #007bff;             /* text color matches border */
-  background-color: transparent; 
-  border: 2px solid #007bff;   /* blue border */
+  color: #fff;
+  background-color: #007bff; 
+  border: none;
   border-radius: 10px;      
   text-decoration: none;
   text-align: center;
   white-space: nowrap;      
   min-width: 180px;         
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-download:hover {
-  background-color: #007bff;  /* fill on hover */
-  color: #fff;                /* text becomes white on hover */
+  background-color: #0056b3;
   transform: translateY(-2px);
 }

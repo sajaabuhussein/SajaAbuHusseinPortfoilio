@@ -3,6 +3,7 @@
 
 <head>
  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Saja Abu Hussein's Portfolio</title>
@@ -123,7 +124,6 @@ Artificial Intelligence and Cyber security, especially bug bounty and web securi
             <div class="row">
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>28 August 2004</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>sajaabohossein@gmail.com</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+961 78 970 271</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Tripoli Lebanon</span></li>
@@ -131,7 +131,6 @@ Artificial Intelligence and Cyber security, especially bug bounty and web securi
               </div>
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>21</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bachelor Of Science In Computer Science</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>linkedin:</strong> <span>sajaabuhussein</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Univerity:</strong> <span>Beirut Arab University (BAU)</span></li>
@@ -549,14 +548,14 @@ activities and promoting health education among students.</p>
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
                   <h3>Address</h3>
-                  <p>Nahr El Bared Camp / Tripoli /Lebanon</p>
+                  <p> Tripoli /Lebanon</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
-                  <h3>Call Me</h3>
+                  <h3>Call</h3>
                   <p>+961 78 970 271</p>
                 </div>
               </div><!-- End Info Item -->
@@ -564,7 +563,7 @@ activities and promoting health education among students.</p>
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
                 <i class="bi bi-envelope flex-shrink-0"></i>
                 <div>
-                  <h3>Email Me</h3>
+                  <h3>Email</h3>
                   <p>sajaabohossein@gmail.com</p>
                 </div>
               </div><!-- End Info Item -->
@@ -573,45 +572,39 @@ activities and promoting health education among students.</p>
             </div>
           </div>
 
-          <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
+         <div class="col-lg-7">
+  <form action="https://api.web3forms.com/submit" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+    <div class="row gy-4">
 
-                <div class="col-md-6">
-                  <label for="name-field" class="pb-2">Your Name</label>
-                  <input type="text" name="name" id="name-field" class="form-control" required="">
-                </div>
-
-                <div class="col-md-6">
-                  <label for="email-field" class="pb-2">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email-field" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <label for="subject-field" class="pb-2">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <label for="message-field" class="pb-2">Message</label>
-                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div><!-- End Contact Form -->
-
-        </div>
-
+      <div class="col-md-6">
+         <input type="hidden" name="access_key" value="664912ba-0611-4de3-ad6d-e3b390f05cb2">
+        <label for="name-field" class="pb-2">Your Name</label>
+        <input type="text" name="name" id="name-field" class="form-control" required>
       </div>
+
+      <div class="col-md-6">
+        <label for="email-field" class="pb-2">Your Email</label>
+        <input type="email" name="email" id="email-field" class="form-control" required>
+      </div>
+
+      <div class="col-md-12">
+        <label for="subject-field" class="pb-2">Subject</label>
+        <input type="text" name="subject" id="subject-field" class="form-control">
+      </div>
+
+      <div class="col-md-12">
+        <label for="message-field" class="pb-2">Message</label>
+        <textarea name="message" rows="10" id="message-field" class="form-control" required></textarea>
+      </div>
+
+      <div class="col-md-12 text-center">
+        <button type="submit">Send Message</button>
+      </div>
+
+    </div>
+  </form>
+</div>
+
 
     </section><!-- /Contact Section -->
 
