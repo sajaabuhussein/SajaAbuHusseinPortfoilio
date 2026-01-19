@@ -1,3 +1,4 @@
+
 (function() {
   "use strict";
 
@@ -282,3 +283,50 @@
   }
 
 })();
+document.addEventListener("DOMContentLoaded", () => {
+
+  const headerToggle = document.querySelector('.header-toggle');
+  const header = document.querySelector('#header');
+  const navLinks = document.querySelectorAll('#navmenu a');
+
+  // Toggle menu
+  headerToggle.addEventListener('click', () => {
+    header.classList.toggle('open');
+    headerToggle.classList.toggle('bi-list');
+    headerToggle.classList.toggle('bi-x');
+  });
+
+  // Close menu when clicking a link (mobile)
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      header.classList.remove('open');
+      headerToggle.classList.add('bi-list');
+      headerToggle.classList.remove('bi-x');
+    });
+  });
+
+});
+document.addEventListener("DOMContentLoaded", function () {
+
+  const toggle = document.querySelector(".header-toggle");
+  const header = document.getElementById("header");
+
+  if (!toggle || !header) {
+    console.error("Navbar elements not found");
+    return;
+  }
+
+  toggle.onclick = function () {
+    header.classList.toggle("mobile-nav-active");
+
+    if (toggle.classList.contains("bi-list")) {
+      toggle.classList.remove("bi-list");
+      toggle.classList.add("bi-x");
+    } else {
+      toggle.classList.remove("bi-x");
+      toggle.classList.add("bi-list");
+    }
+  };
+
+});
+
