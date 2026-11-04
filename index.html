@@ -175,6 +175,11 @@ input:focus,textarea:focus{outline:2px solid var(--accent); outline-offset:0; bo
 textarea{min-height:120px; resize:vertical}
 .two{display:grid; grid-template-columns:1fr 1fr; gap:14px}
 .formnote{font-size:.82rem; color:var(--muted)}
+.formnote.ok{color:var(--accent); font-weight:500}
+.formnote.err{color:var(--signal)}
+.formnote .sel{user-select:all; color:var(--ink)}
+.hp{position:absolute!important; left:-9999px; width:1px; height:1px; opacity:0}
+.btn:disabled{opacity:.7; cursor:progress}
 
 footer{border-top:1px solid var(--line); padding-block:28px; color:var(--muted); font-size:.85rem}
 footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px}
@@ -889,8 +894,9 @@ main, footer{position:relative; z-index:1}
         </div>
         <label for="cf-subject">Subject<input id="cf-subject" name="subject" placeholder="Job opportunity, project, question…"></label>
         <label for="cf-msg">Message<textarea id="cf-msg" name="message" required></textarea></label>
-        <button class="btn" type="submit" style="justify-self:start">Write email</button>
-        <p class="formnote" id="formNote">Opens your email app with the message filled in.</p>
+        <input type="text" name="_honey" id="cf-honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+        <button class="btn" type="submit" id="cf-send" style="justify-self:start">Send message</button>
+        <p class="formnote" id="formNote" role="status" aria-live="polite">Your message goes straight to my inbox. I usually reply within 48 hours.</p>
       </form>
     </div>
   </section>
@@ -948,17 +954,34 @@ main, footer{position:relative; z-index:1}
     var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected';
   }
 
-  document.getElementById('contactForm').addEventListener('submit', function(e){
+  /* Contact form: delivered to the inbox through FormSubmit (works on the live site) */
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/sajaabohossein@gmail.com';
+  var form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
     e.preventDefault();
-    var $ = function(id){ return document.getElementById(id); }, note = $('formNote');
+    var $ = function(id){ return document.getElementById(id); }, note = $('formNote'), btn = $('cf-send');
     var name = $('cf-name').value.trim(), email = $('cf-email'), msg = $('cf-msg').value.trim();
+    note.className = 'formnote';
     if (!name || !msg || !email.value || !email.checkValidity()){
-      note.textContent = 'Add your name, a valid email and a message, then try again.'; return;
+      note.textContent = 'Add your name, a valid email and a message, then try again.'; note.classList.add('err'); return;
     }
-    var subject = $('cf-subject').value.trim() || ('Message from ' + name);
-    var body = msg + '\n\n— ' + name + ' (' + email.value.trim() + ')';
-    location.href = 'mailto:sajaabohossein@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    note.textContent = 'If your email app did not open, email sajaabohossein@gmail.com directly.';
+    if ($('cf-honey').value) return;
+    var subject = $('cf-subject').value.trim() || 'New message from ' + name;
+    btn.disabled = true; btn.textContent = 'Sending…'; note.textContent = 'Sending your message…';
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name: name, email: email.value.trim(), _replyto: email.value.trim(), message: msg,
+        _subject: 'Portfolio: ' + subject, _template: 'table', _captcha: 'false' })
+    }).then(function(r){ return r.json().then(function(d){ if (!r.ok || String(d.success) === 'false') throw new Error(d.message || 'failed'); }); })
+    .then(function(){
+      form.reset(); note.textContent = 'Thank you, ' + name.split(' ')[0] + '. Your message was sent and I will reply by email soon.'; note.classList.add('ok');
+      btn.textContent = 'Sent ✓'; setTimeout(function(){ btn.disabled = false; btn.textContent = 'Send message'; }, 4000);
+    })
+    .catch(function(){
+      note.innerHTML = 'The message could not be sent. Please email me directly at <b class="sel">sajaabohossein@gmail.com</b>.'; note.classList.add('err');
+      btn.disabled = false; btn.textContent = 'Send message';
+    });
   });
 
   /* ================= MOTION LAYER ================= */
